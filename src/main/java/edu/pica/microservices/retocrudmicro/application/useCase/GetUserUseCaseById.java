@@ -4,5 +4,5 @@ import edu.pica.microservices.retocrudmicro.domain.model.User;
 import java.util.Optional;
 
 public interface GetUserUseCaseById {
-    Optional<User> getUserById(Long id);
+    User getUserById(Long id);
 }

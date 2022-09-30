@@ -4,6 +4,7 @@ import edu.pica.microservices.retocrudmicro.domain.model.User;
 import edu.pica.microservices.retocrudmicro.infraestructure.adapters.output.entity.UserEntity;
 import org.mapstruct.Mapper;
 
+
 import java.util.List;
 
 @Mapper
