@@ -25,7 +25,6 @@ public class UserRequest {
     private String  nombre;
     @NotEmpty(message = "Apellido may not be empty")
     private String apellido ;
-    @NotEmpty(message = "Fecha may not be empty")
     private Date fecha ;
 
 }
