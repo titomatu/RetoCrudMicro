@@ -7,8 +7,9 @@ import edu.pica.microservices.retocrudmicro.infraestructure.adapters.output.mapp
 import edu.pica.microservices.retocrudmicro.infraestructure.adapters.output.repository.UserRepository;
 import edu.pica.microservices.retocrudmicro.infraestructure.exception.UserPersistenceErrorException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataAccessException;
-
+@Slf4j
 @RequiredArgsConstructor
 public class UpdateUserPersistenceAdapter implements UpdateUserOutputPort {
 
@@ -21,6 +22,8 @@ public class UpdateUserPersistenceAdapter implements UpdateUserOutputPort {
         try{
         userPersinstenceMapper.toUserEntity(user);
         userEntity = userRepository.save(userEntity);
+        log.info(" USER ACTUALIZADO: "+ userEntity.getId()  + " CON IDENTIFICACION: " + userEntity.getIdentificacion() );
+
         }catch (DataAccessException e){
         throw new UserPersistenceErrorException(e);
         }

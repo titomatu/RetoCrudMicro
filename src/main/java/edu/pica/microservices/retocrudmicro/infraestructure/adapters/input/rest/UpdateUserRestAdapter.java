@@ -9,6 +9,7 @@ import lombok.AllArgsConstructor;
 import org.mapstruct.control.MappingControl;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -22,7 +23,7 @@ public class UpdateUserRestAdapter {
 
     private final UpdateUserUseCase updateUserUseCase;
     private final UserRestMapper userRestMapper;
-
+    @PutMapping(value = "/")
     public ResponseEntity<UserResponse>  updateUser(@RequestBody @Valid UserRequest userRequest){
         User user = userRestMapper.toUser(userRequest);
         user = updateUserUseCase.updateUser(user);
