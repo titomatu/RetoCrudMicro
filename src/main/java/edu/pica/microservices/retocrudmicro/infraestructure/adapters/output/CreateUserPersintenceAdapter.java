@@ -4,7 +4,7 @@ import edu.pica.microservices.retocrudmicro.domain.model.User;
 import edu.pica.microservices.retocrudmicro.infraestructure.adapters.output.entity.UserEntity;
 import edu.pica.microservices.retocrudmicro.infraestructure.adapters.output.mapper.UserPersinstenceMapper;
 import edu.pica.microservices.retocrudmicro.infraestructure.adapters.output.repository.UserRepository;
-import edu.pica.microservices.retocrudmicro.infraestructure.exception.UserPersistenceErrorException;
+import edu.pica.microservices.retocrudmicro.infraestructure.exception.UserPersistenceException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataAccessException;
@@ -23,7 +23,7 @@ public class CreateUserPersintenceAdapter implements CreateUserOutputPort {
             userEntity = userRepository.save(userEntity);
             log.info(" USER CREADO: "+ userEntity.getId()  + " CON IDENTIFICACION: " + userEntity.getIdentificacion() );
         }catch (DataAccessException e){
-            throw new UserPersistenceErrorException(e);
+            throw new UserPersistenceException(e);
         }
 
         return userPersinstenceMapper.toUser(userEntity);

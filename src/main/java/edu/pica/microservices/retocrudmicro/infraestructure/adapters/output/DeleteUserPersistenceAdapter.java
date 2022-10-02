@@ -1,7 +1,7 @@
 package edu.pica.microservices.retocrudmicro.infraestructure.adapters.output;
 import edu.pica.microservices.retocrudmicro.application.port.DeleteUserOutputPortById;
 import edu.pica.microservices.retocrudmicro.infraestructure.adapters.output.repository.UserRepository;
-import edu.pica.microservices.retocrudmicro.infraestructure.exception.UserPersistenceErrorException;
+import edu.pica.microservices.retocrudmicro.infraestructure.exception.UserPersistenceException;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataAccessException;
@@ -17,7 +17,7 @@ public class DeleteUserPersistenceAdapter implements DeleteUserOutputPortById {
             userRepository.deleteById(id);
             log.info(" USER ELIMINADO CON ID: "+ id  );
         }catch (DataAccessException e){
-            throw new UserPersistenceErrorException(e);
+            throw new UserPersistenceException(e);
         }
 
         return null;

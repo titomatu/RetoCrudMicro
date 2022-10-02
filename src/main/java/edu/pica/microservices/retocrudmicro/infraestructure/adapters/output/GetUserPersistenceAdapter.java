@@ -5,7 +5,8 @@ import edu.pica.microservices.retocrudmicro.domain.model.User;
 import edu.pica.microservices.retocrudmicro.infraestructure.adapters.output.entity.UserEntity;
 import edu.pica.microservices.retocrudmicro.infraestructure.adapters.output.mapper.UserPersinstenceMapper;
 import edu.pica.microservices.retocrudmicro.infraestructure.adapters.output.repository.UserRepository;
-import edu.pica.microservices.retocrudmicro.infraestructure.exception.UserPersistenceErrorException;
+import edu.pica.microservices.retocrudmicro.infraestructure.exception.UserPersistenceException;
+import edu.pica.microservices.retocrudmicro.infraestructure.warning.UserRequestWarning;
 import lombok.RequiredArgsConstructor;
 import org.springframework.dao.DataAccessException;
 
@@ -26,7 +27,7 @@ public class GetUserPersistenceAdapter implements GetUserOutputPort {
            userEntities = userRepository.findAll();
            users = userPersinstenceMapper.toUsers(userEntities);
        }catch (DataAccessException e){
-           throw new UserPersistenceErrorException(e);
+           throw new UserPersistenceException(e);
        }
 
         return users;

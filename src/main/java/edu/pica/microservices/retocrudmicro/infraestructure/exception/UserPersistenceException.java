@@ -1,9 +1,8 @@
 package edu.pica.microservices.retocrudmicro.infraestructure.exception;
 
-public class UserPersistenceErrorException extends TechnicalException {
+public class UserPersistenceException extends TechnicalException {
     private static final long serialVersionUID = 1L;
-
-    public UserPersistenceErrorException(Throwable message) {
+    public UserPersistenceException(Throwable message) {
         super(ExceptionCode.ERROR_OF_PERSISTENCE, message);
     }
 }
