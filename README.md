@@ -30,7 +30,7 @@ Obtenemos una respuesta así con la severidad actual:
 
 Para cambiar el nivel de severidad de los logs ejecutamos un request tipo POST:
 
-curl -i -X POST -H 'Content-Type: application/json' -d '{"configuredLevel": "TRACE"}' http://localhost:8085/actuator/loggers/edu.pica.microservices.retocrudmicro
+curl -i -X POST -H 'Content-Type: application/json' -d '{"configuredLevel": "TRACE"}' http://localhost:9090/actuator/loggers/edu.pica.microservices.retocrudmicro
 
 En el cuerpo observamos un JSON donde el valor del campo configuredLevel establecemos la severidad deseada.
 
