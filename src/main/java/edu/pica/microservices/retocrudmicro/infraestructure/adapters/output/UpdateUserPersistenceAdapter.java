@@ -23,7 +23,7 @@ public class UpdateUserPersistenceAdapter implements UpdateUserOutputPort {
         userEntity = userPersinstenceMapper.toUserEntity(user);
         userEntity = userRepository.save(userEntity);
         log.info(" USER ACTUALIZADO: "+ userEntity.getId()  + " CON IDENTIFICACION: " + userEntity.getIdentificacion() );
-
+        log.debug("Persistencia de Información :"+ userEntity.getId()  + " CON IDENTIFICACION: " + userEntity.getIdentificacion() );
         }catch (DataAccessException e){
         throw new UserPersistenceException(e);
         }

@@ -7,10 +7,11 @@ import edu.pica.microservices.retocrudmicro.infraestructure.adapters.output.mapp
 import edu.pica.microservices.retocrudmicro.infraestructure.adapters.output.repository.UserRepository;
 import edu.pica.microservices.retocrudmicro.infraestructure.exception.UserPersistenceException;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataAccessException;
 
 import java.util.Optional;
-
+@Slf4j
 @RequiredArgsConstructor
 public class GetUserPersistenceAdapterById implements GetUserOutputPortById {
 
@@ -25,7 +26,9 @@ public class GetUserPersistenceAdapterById implements GetUserOutputPortById {
            Optional<UserEntity>  userEntity = userRepository.findById(id);
            if (userEntity.isEmpty()){
                return Optional.empty();
+
            }
+           log.debug("ID de Usuario Buscado: " + id);
            user  = userPersinstenceMapper.toUser(userEntity.get());
        }catch (DataAccessException e){
            throw new UserPersistenceException(e);
