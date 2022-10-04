@@ -1,5 +1,8 @@
 package edu.pica.microservices.retocrudmicro.infraestructure.exception;
 
+import edu.pica.microservices.retocrudmicro.infraestructure.warning.BaseWarning;
+import edu.pica.microservices.retocrudmicro.infraestructure.warning.TechnicalWarning;
+import edu.pica.microservices.retocrudmicro.infraestructure.warning.WarningResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +20,7 @@ import java.util.Map;
 public class ExceptionController {
 
     static final  String LOG_TEMPLATE = "[Error :: {} - {}] :: {}]";
+    static final  String LOG_WARN_TEMPLATE = "[Warn :: {} - {}] :: {}]";
 
     @ResponseStatus(code = HttpStatus.BAD_REQUEST)
     @ExceptionHandler(MethodArgumentNotValidException.class)
@@ -48,6 +52,12 @@ public class ExceptionController {
         return new ResponseEntity<>(response, HttpStatus.SERVICE_UNAVAILABLE);
     }
 
+    @ExceptionHandler(TechnicalWarning.class)
+    public ResponseEntity<WarningResponse> handleTechnicalWarning(TechnicalWarning ex) {
+        log.warn(LOG_WARN_TEMPLATE,ex.getExceptionCode(), ex.getId(), ex.getMessage());
+        final WarningResponse response = createUnexpectedErrorResponse(ex);
+        return new ResponseEntity<>(response, HttpStatus.SERVICE_UNAVAILABLE);
+    }
 
     private ErrorResponse createUnexpectedErrorResponse(BaseException ex) {
         return ErrorResponse.builder().errorCode(ex.getExceptionCode().getCode())
@@ -57,5 +67,10 @@ public class ExceptionController {
     private ErrorResponse createResponse(BaseException ex) {
         return ErrorResponse.builder().errorCode(ex.getExceptionCode().getCode())
                 .message(ex.getMessage()).build();
+    }
+
+    private WarningResponse createUnexpectedErrorResponse(BaseWarning ex) {
+        return WarningResponse.builder().errorCode(ex.getExceptionCode().getCode())
+                .message(ex.getExceptionCode().getType()).errorId(ex.getId()).details(ex.getMessage()).build();
     }
 }

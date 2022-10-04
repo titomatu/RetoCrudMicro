@@ -1,13 +1,7 @@
 package edu.pica.microservices.retocrudmicro.infraestructure.config;
 
-import edu.pica.microservices.retocrudmicro.domain.service.CreateUserService;
-import edu.pica.microservices.retocrudmicro.domain.service.GetUserService;
-import edu.pica.microservices.retocrudmicro.domain.service.GetUserServiceById;
-import edu.pica.microservices.retocrudmicro.domain.service.UpdateUserService;
-import edu.pica.microservices.retocrudmicro.infraestructure.adapters.output.CreateUserPersintenceAdapter;
-import edu.pica.microservices.retocrudmicro.infraestructure.adapters.output.GetUserPersistenceAdapter;
-import edu.pica.microservices.retocrudmicro.infraestructure.adapters.output.GetUserPersistenceAdapterById;
-import edu.pica.microservices.retocrudmicro.infraestructure.adapters.output.UpdateUserPersistenceAdapter;
+import edu.pica.microservices.retocrudmicro.domain.service.*;
+import edu.pica.microservices.retocrudmicro.infraestructure.adapters.output.*;
 import edu.pica.microservices.retocrudmicro.infraestructure.adapters.output.mapper.UserPersinstenceMapper;
 import edu.pica.microservices.retocrudmicro.infraestructure.adapters.output.repository.UserRepository;
 import org.springframework.context.annotation.Bean;
@@ -53,5 +47,14 @@ public class BeanConfiguration {
     @Bean
     public UpdateUserService updateUserService(UpdateUserPersistenceAdapter updateUserPersistenceAdapter){
        return new UpdateUserService(updateUserPersistenceAdapter);
+    }
+
+    @Bean
+    public DeleteUserPersistenceAdapter deleteUserPersistenceAdapter(UserRepository userRepository){
+       return new DeleteUserPersistenceAdapter(userRepository);
+    }
+    @Bean
+    public DeleteUserService deleteUserService(DeleteUserPersistenceAdapter deleteUserPersistenceAdapter){
+       return new DeleteUserService(deleteUserPersistenceAdapter);
     }
 }
