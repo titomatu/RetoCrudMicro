@@ -22,6 +22,7 @@ public class GetUserPersistenceAdapterById implements GetUserOutputPortById {
     @Override
     public Optional<User> getUserById(Long id) {
         User user = new User();
+        log.info("ID de Usuario Buscado: " + id);
        try{
            Optional<UserEntity>  userEntity = userRepository.findById(id);
            if (userEntity.isEmpty()){

@@ -8,11 +8,12 @@ import edu.pica.microservices.retocrudmicro.infraestructure.adapters.output.repo
 import edu.pica.microservices.retocrudmicro.infraestructure.exception.UserPersistenceException;
 import edu.pica.microservices.retocrudmicro.infraestructure.warning.UserRequestWarning;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.DataAccessException;
 
 import java.util.ArrayList;
 import java.util.List;
-
+@Slf4j
 @RequiredArgsConstructor
 public class GetUserPersistenceAdapter implements GetUserOutputPort {
 
@@ -25,6 +26,7 @@ public class GetUserPersistenceAdapter implements GetUserOutputPort {
         List<User> users = new ArrayList<User>();
        try {
            userEntities = userRepository.findAll();
+           log.info("Lista De Usuarios Obtenida " );
            users = userPersinstenceMapper.toUsers(userEntities);
        }catch (DataAccessException e){
            throw new UserPersistenceException(e);

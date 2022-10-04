@@ -21,7 +21,7 @@ public class CreateUserPersintenceAdapter implements CreateUserOutputPort {
         try {
             userEntity =  userPersinstenceMapper.toUserEntity(user);
             userEntity = userRepository.save(userEntity);
-            log.info(" USER CREADO: "+ userEntity.getId()  + " CON IDENTIFICACION: " + userEntity.getIdentificacion() );
+            log.info(" Usuario  Creado: "+ userEntity.getId()  + " Con Identificación: " + userEntity.getIdentificacion() );
         }catch (DataAccessException e){
             throw new UserPersistenceException(e);
         }

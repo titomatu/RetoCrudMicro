@@ -15,7 +15,7 @@ public class DeleteUserPersistenceAdapter implements DeleteUserOutputPortById {
     public Void deleteUser(Long id) {
         try{
             userRepository.deleteById(id);
-            log.info(" USER ELIMINADO CON ID: "+ id  );
+            log.info("Usuario  Eliminado Con ID: "+ id  );
         }catch (DataAccessException e){
             throw new UserPersistenceException(e);
         }
