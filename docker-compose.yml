@@ -1,16 +1,11 @@
 #Se define la version que se esta utilizando del archivo docker-compose
 version: app/V1
 services:
-  #crear la imagen de K8S
-  redis-master:
-    image: registry.k8s.io/redis:e2e
-    ports:
-      - "6379"
-  #crear la imagen de mysql:5.7    
+  #crear la imagen de mysql:5.7
   mysqldb:
     image: mysql:5.7
-    restart: unless-stopped
-    #Se realiza lectura del archivo .env para leer parametros de acceso a BD
+    restart: always
+    #Se realiza lectura del archivo .env para leer parametros de acceso a BD unless-stopped
     env_file: ./.env
     environment:
       - MYSQL_ROOT_PASSWORD=$MYSQLDB_ROOT_PASSWORD
