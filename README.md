@@ -7,14 +7,21 @@ Arquitectura
 Principios:
 La Arquitectura Hexagonal propone que nuestro dominio sea el n�cleo de las capas y que este no se acople a nada externo. En lugar de hacer uso expl�cito y mediante el principio de inversi�n de dependencias nos acoplamos a contratos (interfaces o puertos) y no a implementaciones concretas.
 
-Pasos Ejecuci�n
+Pasos Ejecución
 
-mvn clean
-mvn install
+1. mvn clean install
+2. Ejecutal el archivo docker compose yml
+3. Para acceder a la url del servicio: http://127.0.0.1:9090/users/
+4. Ejemplo de Payload: 
 
-Realizar un Build
+{
+"email":"prueba3@hotmail.com",
+"identificacion": "3333",
+"nombre": "prueba-3",
+"apellido": "pruaba3",
+"fecha": "2022-08-08"
+}
 
-Realizar Ejecutar
 
 ## Modificación Severidad Logs en Tiempo Ejecución
 
@@ -27,6 +34,8 @@ curl http://localhost:9090/actuator/loggers/edu.pica.microservices.retocrudmicro
 Obtenemos una respuesta así con la severidad actual:
 
 {"configuredLevel":"ERROR","effectiveLevel":"ERROR"}
+
+### Cambiar la severidad de los Logs
 
 Para cambiar el nivel de severidad de los logs ejecutamos un request tipo POST:
 
@@ -42,16 +51,13 @@ curl http://localhost:9090/actuator/loggers/edu.pica.microservices.retocrudmicro
 
 Se construye la V1 del archivo .yml donde se están creando las siguientes imágenes:
 
-1. Se crea la imagen de K8S por medio de la Redis que es una BD distribuida en memoria que ofrece estructura de datos y imágenes para realizar consultas más rápidas y escalables
-   de aqui se crea la imagen registry.k8s.io/redis:e2e.
+1. Se crea la imagen de mysql para la cual se creó en el archivo .env las varibles con los datos de conexión para ser pasados por medio de variables.
 
-2. Se crea la imagen de mysql:5.7 para la cual se creó en el archivo .env las varibles con los datos de conexión para ser pasados por medio de variables.
+2. Se declara la dependencia que hay de Spring Boot y mysql.
 
-3. Se declara la dependencia que hay de Spring Boot y mysql.
+3. Se realiza lectura del archivo .env para leer párametros de acceso a BD y Spring Boot y asi crear por último la imagen de la app.
 
-4. Se realiza lectura del archivo .env para leer párametros de acceso a BD y Spring Boot y asi crear por último la imagen de la app.
-
-5. Se definen los volumenes que se asignaran a la aplicación asociándolos por medio de los comandos stdin_open: true y tty: true.
+4. Se definen los volumenes que se asignaran a la aplicación asociándolos por medio de los comandos stdin_open: true y tty: true.
 
 
 
