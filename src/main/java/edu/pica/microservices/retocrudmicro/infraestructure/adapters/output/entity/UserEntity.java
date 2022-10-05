@@ -20,10 +20,15 @@ public class UserEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Column(name = "email")
     private String email ;
+   @Column(name = "identificacion" , unique = true)
     private String identificacion ;
+    @Column(name = "nombre")
     private String  nombre;
+    @Column(name = "apellido")
     private String apellido ;
+    @Column(name = "fecha")
     private Date fecha ;
 
 }

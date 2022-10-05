@@ -38,5 +38,22 @@ Podemos consultar nuevamente la severidad cambiada ejcutando:
 
 curl http://localhost:9090/actuator/loggers/edu.pica.microservices.retocrudmicro
 
+#### Creacion Archivo Docker-compose.yml
+
+Se construye la V1 del archivo .yml donde se están creando las siguientes imágenes:
+
+1. Se crea la imagen de K8S por medio de la Redis que es una BD distribuida en memoria que ofrece estructura de datos y imágenes para realizar consultas más rápidas y escalables
+   de aqui se crea la imagen registry.k8s.io/redis:e2e.
+
+2. Se crea la imagen de mysql:5.7 para la cual se creó en el archivo .env las varibles con los datos de conexión para ser pasados por medio de variables.
+
+3. Se declara la dependencia que hay de Spring Boot y mysql.
+
+4. Se realiza lectura del archivo .env para leer párametros de acceso a BD y Spring Boot y asi crear por último la imagen de la app.
+
+5. Se definen los volumenes que se asignaran a la aplicación asociándolos por medio de los comandos stdin_open: true y tty: true.
+
+
+
 
 
